@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//static/js/jquery-2.1.0.min.js"></script>
+    <title>test websocket</title>
+  </head>
+  <body>
+    <div id="svg">{{.Data}}</div>
+    <script type="text/javascript">
+      $(function() {
+          var data = document.getElementById("svg");
+          var conn = new WebSocket("ws://{{.Host}}/ws");
+          conn.onclose = function(evt) {
+              data.textContent = 'Connection closed';
+          }
+          conn.onmessage = function(evt) {
+              $("div#svg > svg").replaceWith(evt.data);
+              console.log(evt.data);
+          }
+      });
+    </script>
+  </body>
+</html>
