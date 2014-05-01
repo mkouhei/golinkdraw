@@ -1,0 +1,14 @@
+============
+ Golinkdraw
+============
+
+Golinkdraw is a Golang implementation of `Linkdraw <https://github.com/mtoshi/linkdraw>`_.
+Linkdraw is a draggable and linkable SVG viewer JavaScript library.
+
+
+
+License
+=======
+
+This software is released under the Expat License same as with Linkdraw,
+see LICENSE.
