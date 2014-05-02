@@ -4,7 +4,10 @@
 BIN := linkdraw
 SRC := *.go
 
-all:
+all: clean format test build
+
+
+build:
 	go build -o _build/$(BIN)
 
 
@@ -17,3 +20,7 @@ format:
 		gofmt $$src > $$src.tmp ;\
 		mv -f $$src.tmp $$src ;\
 	done
+
+
+test:
+	go test
