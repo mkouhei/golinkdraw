@@ -4,14 +4,16 @@ import (
 	"bytes"
 	"io"
 	"os"
+
+	"github.com/ajstarks/svgo"
 )
 
-func StringSVG() string {
+func StringSVG(f func(io.Writer) *svg.SVG) string {
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
 	// rendering SVG
-	RenderingSVG(os.Stdout)
+	f(os.Stdout)
 
 	o := make(chan string)
 	go func() {
