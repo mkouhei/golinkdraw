@@ -3,11 +3,20 @@
 
 BIN := linkdraw
 SRC := *.go
+GOPKG := github.com/mkouhei/golinkdraw/
+GOPATH := $(CURDIR)/_build:$(GOPATH)
+export GOPATH
+
 
 all: clean format test build
 
+prebuild:
+	install -d $(CURDIR)/_build/src/$(GOPKG)
+	cp -a $(CURDIR)/*.go $(CURDIR)/_build/src/$(GOPKG)
+	cp -a $(CURDIR)/modules $(CURDIR)/_build/src/$(GOPKG)
 
-build:
+
+build: prebuild
 	go build -o _build/$(BIN)
 
 
@@ -22,5 +31,5 @@ format:
 	done
 
 
-test:
+test: prebuild
 	go test

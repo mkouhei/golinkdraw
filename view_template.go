@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/mkouhei/golinkdraw/modules"
 	"net/http"
 	"text/template"
 )
@@ -25,7 +26,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		Data string
 	}{
 		r.Host,
-		StringSVG(RenderingSVG),
+		StringSVG(modules.RenderingSVG),
 	}
 	homeTempl.Execute(w, &v)
 }

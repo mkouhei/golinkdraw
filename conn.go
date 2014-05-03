@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/gorilla/websocket"
+	"github.com/mkouhei/golinkdraw/modules"
 	"log"
 	"net/http"
 	"time"
-
-	"github.com/gorilla/websocket"
 )
 
 const (
@@ -59,7 +59,7 @@ func writer(ws *websocket.Conn) {
 			}
 
 			// generate SVG string
-			strSVG := StringSVG(RenderingSVG)
+			strSVG := StringSVG(modules.RenderingSVG)
 
 			if err := ws.WriteMessage(websocket.TextMessage, []byte(strSVG)); err != nil {
 				log.Println(err)
