@@ -2,7 +2,7 @@
 # -*- makefile -*-
 
 BIN := linkdraw
-SRC := *.go
+SRC := *.go modules/*.go
 GOPKG := github.com/mkouhei/golinkdraw/
 GOPATH := $(CURDIR)/_build:$(GOPATH)
 export GOPATH
