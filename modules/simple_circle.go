@@ -12,7 +12,7 @@ func now() string {
 	return t.Format(time.RFC3339)
 }
 
-func RenderingSVG(w io.Writer) *svg.SVG {
+func SimpleCircle(w io.Writer) *svg.SVG {
 	canvas := svg.New(w)
 	width := 400
 	height := 400

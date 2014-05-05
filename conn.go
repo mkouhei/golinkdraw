@@ -59,7 +59,7 @@ func writer(ws *websocket.Conn) {
 			}
 
 			// generate SVG string
-			strSVG := StringSVG(modules.RenderingSVG)
+			strSVG := StringSVG(modules.SimpleCircle)
 
 			if err := ws.WriteMessage(websocket.TextMessage, []byte(strSVG)); err != nil {
 				log.Println(err)

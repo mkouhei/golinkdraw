@@ -26,7 +26,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		Data string
 	}{
 		r.Host,
-		StringSVG(modules.RenderingSVG),
+		StringSVG(modules.SimpleCircle),
 	}
 	homeTempl.Execute(w, &v)
 }
