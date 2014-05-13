@@ -1,3 +1,16 @@
+/*
+ github.com/mkouhei/golinkdraw/conn.go
+
+ Copyright (c) 2014 Kouhei Maeda <mkouhei@palmtb.net>
+
+ This software is release under the Expat License.
+
+ This source code is a modification of the source code of
+ https://github.com/gorilla/websocket/examples/filewatch/main.go
+
+ The original source code is licensed under the 2-Clause BSD License,
+ and copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+*/
 package main
 
 import (

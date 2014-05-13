@@ -1,3 +1,10 @@
+/*
+ github.com/mkouhei/golinkdraw/modules/simple_circle.go
+
+ Copyright (c) 2014 Kouhei Maeda <mkouhei@palmtb.net>
+
+ This software is release under the Expat License.
+*/
 package modules
 
 import (
