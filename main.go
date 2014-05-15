@@ -19,6 +19,7 @@ var (
 )
 
 func main() {
+	go h.run()
 	http.Handle("/", http.HandlerFunc(serveHome))
 	http.Handle("/ws", http.HandlerFunc(serveWs))
 	http.Handle("/static/", http.FileServer(http.Dir(".")))

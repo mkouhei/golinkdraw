@@ -16,6 +16,8 @@
           conn.onmessage = function(evt) {
               $("div#svg > svg").replaceWith(evt.data);
               console.log(evt.data);
+              conn.send({"height": window.innerHeight,
+                         "width": window.innerWidth});
           }
       });
     </script>
