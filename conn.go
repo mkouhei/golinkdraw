@@ -14,6 +14,7 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/gorilla/websocket"
 	"github.com/mkouhei/golinkdraw/modules"
 	"log"
@@ -86,7 +87,16 @@ func (c *connection) writePump() {
 				c.write(websocket.CloseMessage, []byte{})
 				return
 			}
-			log.Println(message)
+			var data map[string]interface{}
+			if err := json.Unmarshal(message, &data); err != nil {
+				//log.Println(err)
+				continue
+			}
+			log.Println(data)
+			height := data["height"].(float64)
+			width := data["width"].(float64)
+			log.Println(height)
+			log.Println(width)
 			strSVG := StringSVG(modules.SimpleCircle)
 			if err := c.write(websocket.TextMessage, []byte(strSVG)); err != nil {
 				return
