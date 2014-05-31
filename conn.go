@@ -87,16 +87,25 @@ func (c *connection) writePump() {
 				c.write(websocket.CloseMessage, []byte{})
 				return
 			}
-			var data map[string]interface{}
+			type Response struct {
+				Height int `json:"height"`
+				Width  int `json:"width"`
+			}
+			data := &Response{}
+			//var data map[string]interface{}
 			if err := json.Unmarshal(message, &data); err != nil {
 				//log.Println(err)
 				continue
 			}
 			log.Println(data)
-			height := data["height"].(float64)
-			width := data["width"].(float64)
-			log.Println(height)
-			log.Println(width)
+			log.Println(data.Height)
+			log.Println(data.Width)
+			//height := data["height"].(float64)
+			//width := data["width"].(float64)
+			//height := data["height"].(int)
+			//width := data["width"].(int)
+			//log.Println(height)
+			//log.Println(width)
 			strSVG := StringSVG(modules.SimpleCircle)
 			if err := c.write(websocket.TextMessage, []byte(strSVG)); err != nil {
 				return
