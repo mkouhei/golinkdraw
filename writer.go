@@ -21,7 +21,8 @@ func StringSVG(width int, height int) string {
 
 	// rendering SVG
 	canv := modules.Canvas{width, height, os.Stdout}
-	canv.SimpleCircle()
+	//canv.SimpleCircle()
+	canv.Richter()
 
 	o := make(chan string)
 	go func() {
