@@ -16,7 +16,6 @@ package main
 import (
 	"encoding/json"
 	"github.com/gorilla/websocket"
-	"github.com/mkouhei/golinkdraw/modules"
 	"log"
 	"net/http"
 	"time"
@@ -37,6 +36,10 @@ const (
 
 	// Maximum message size allowed from peer.
 	maxMessageSize = 512
+
+	defaultWidth = 400
+
+	defaultHeight = 400
 )
 
 var (
@@ -92,27 +95,16 @@ func (c *connection) writePump() {
 				Width  int `json:"width"`
 			}
 			data := &Response{}
-			//var data map[string]interface{}
 			if err := json.Unmarshal(message, &data); err != nil {
 				//log.Println(err)
 				continue
 			}
-			log.Println(data)
-			log.Println(data.Height)
-			log.Println(data.Width)
-			//height := data["height"].(float64)
-			//width := data["width"].(float64)
-			//height := data["height"].(int)
-			//width := data["width"].(int)
-			//log.Println(height)
-			//log.Println(width)
-			strSVG := StringSVG(modules.SimpleCircle)
+			strSVG := StringSVG(data.Width, data.Height)
 			if err := c.write(websocket.TextMessage, []byte(strSVG)); err != nil {
 				return
 			}
 		case <-pollTicker.C:
-			// generate SVG string
-			strSVG := StringSVG(modules.SimpleCircle)
+			strSVG := StringSVG(defaultWidth, defaultHeight)
 			if err := c.write(websocket.TextMessage, []byte(strSVG)); err != nil {
 				return
 			}

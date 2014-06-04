@@ -8,10 +8,8 @@
 package modules
 
 import (
-	"io"
-	"time"
-
 	"github.com/ajstarks/svgo"
+	"time"
 )
 
 func now() string {
@@ -19,13 +17,11 @@ func now() string {
 	return t.Format(time.RFC3339)
 }
 
-func SimpleCircle(w io.Writer) *svg.SVG {
-	canvas := svg.New(w)
-	width := 400
-	height := 400
-	canvas.Start(width, height)
-	canvas.Circle(width/2, height/2, 200)
-	canvas.Text(width/2, height/2, now(),
+func (canv Canvas) SimpleCircle() *svg.SVG {
+	canvas := svg.New(canv.W)
+	canvas.Start(canv.Width, canv.Height)
+	canvas.Circle(canv.Width/2, canv.Height/2, 200)
+	canvas.Text(canv.Width/2, canv.Height/2, now(),
 		"text-anchor:middle; font-size: 16px; fill: white")
 	canvas.End()
 	return canvas

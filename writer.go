@@ -9,18 +9,19 @@ package main
 
 import (
 	"bytes"
+	"github.com/mkouhei/golinkdraw/modules"
 	"io"
 	"os"
-
-	"github.com/ajstarks/svgo"
 )
 
-func StringSVG(f func(io.Writer) *svg.SVG) string {
+//func StringSVG(f func(io.Writer) *svg.SVG) string {
+func StringSVG(width int, height int) string {
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
 	// rendering SVG
-	f(os.Stdout)
+	canv := modules.Canvas{width, height, os.Stdout}
+	canv.SimpleCircle()
 
 	o := make(chan string)
 	go func() {
