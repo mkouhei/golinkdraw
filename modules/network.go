@@ -18,22 +18,26 @@ func (canv Canvas) Network() *svg.SVG {
 	linestyle := "fill:none;stroke:black"
 	circlestyle := "fill:gray"
 
-	nd := 538
+	nd := 511
 	xpoly := make([]int, nd)
 	ypoly := make([]int, nd)
 	for i := 0; i < nd; i++ {
 		xpoly[i] = rand.Intn(canv.Width)
 		ypoly[i] = rand.Intn(canv.Height)
 		canvas.Circle(xpoly[i], ypoly[i], d, circlestyle)
+		if i > 0 {
+			canvas.Line(xpoly[i-1], ypoly[i-1], xpoly[i], ypoly[i], linestyle)
+		}
 	}
-	canvas.Polyline(xpoly, ypoly, linestyle)
-
-	for i := 0; i < nd; i++ {
-		xpoly[i] = rand.Intn(canv.Width)
-		ypoly[i] = rand.Intn(canv.Height)
-		canvas.Circle(xpoly[i], ypoly[i], d, circlestyle)
-	}
-	canvas.Polyline(xpoly, ypoly, linestyle)
+	//canvas.Polyline(xpoly, ypoly, linestyle)
+	/*
+		for i := 0; i < nd; i++ {
+			xpoly[i] = rand.Intn(canv.Width)
+			ypoly[i] = rand.Intn(canv.Height)
+			canvas.Circle(xpoly[i], ypoly[i], d, circlestyle)
+		}
+		canvas.Polyline(xpoly, ypoly, linestyle)
+	*/
 
 	canvas.End()
 	return canvas
