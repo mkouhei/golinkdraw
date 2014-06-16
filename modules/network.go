@@ -7,7 +7,7 @@ package modules
 
 import (
 	"github.com/ajstarks/svgo"
-	"math/rand"
+	//"math/rand"
 	"strconv"
 )
 
@@ -23,9 +23,26 @@ func (canv Canvas) Network() *svg.SVG {
 	nd := 100
 	xpoly := make([]int, nd)
 	ypoly := make([]int, nd)
-	for i := 0; i < nd; i++ {
-		xpoly[i] = rand.Intn(canv.Width)
-		ypoly[i] = rand.Intn(canv.Height)
+	xpoly[0] = canv.Width / 2
+	ypoly[0] = canv.Height / 2
+	delta := 5
+	canvas.Circle(xpoly[0], ypoly[0], d, circlestyle)
+	for i := 1; i < nd; i++ {
+		if i%4 == 1 {
+			xpoly[i] = xpoly[i-1] + delta*i
+			ypoly[i] = ypoly[i-1] + delta
+		} else if i%4 == 2 {
+			xpoly[i] = xpoly[i-1] - delta
+			ypoly[i] = ypoly[i-1] + delta*i
+		} else if i%4 == 3 {
+			xpoly[i] = xpoly[i-1] - delta*i
+			ypoly[i] = ypoly[i-1] - delta
+		} else if i%4 == 0 {
+			xpoly[i] = xpoly[i-1] + delta
+			ypoly[i] = ypoly[i-1] - delta*i
+		}
+		//xpoly[i] = rand.Intn(canv.Width)
+		//ypoly[i] = rand.Intn(canv.Height)
 		canvas.Circle(xpoly[i], ypoly[i], d, circlestyle)
 		canvas.Text(xpoly[i]+d*2, ypoly[i]-d*2, "("+strconv.Itoa(xpoly[i])+","+strconv.Itoa(ypoly[i])+")", textstyle)
 		if i > 0 {
