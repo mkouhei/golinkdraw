@@ -7,7 +7,6 @@ package modules
 
 import (
 	"github.com/ajstarks/svgo"
-	//"math/rand"
 	"strconv"
 )
 
@@ -41,8 +40,6 @@ func (canv Canvas) Network() *svg.SVG {
 			xpoly[i] = xpoly[i-1] + delta
 			ypoly[i] = ypoly[i-1] - delta*i
 		}
-		//xpoly[i] = rand.Intn(canv.Width)
-		//ypoly[i] = rand.Intn(canv.Height)
 		canvas.Circle(xpoly[i], ypoly[i], d, circlestyle)
 		canvas.Text(xpoly[i]+d*2, ypoly[i]-d*2, "("+strconv.Itoa(xpoly[i])+","+strconv.Itoa(ypoly[i])+")", textstyle)
 		if i > 0 {
