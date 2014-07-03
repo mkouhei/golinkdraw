@@ -10,28 +10,15 @@ package main
 import (
 	"bytes"
 	"github.com/mkouhei/golinkdraw/modules"
-	"io"
-	"os"
 )
 
-//func StringSVG(f func(io.Writer) *svg.SVG) string {
 func StringSVG(width int, height int) string {
-	r, w, _ := os.Pipe()
-	os.Stdout = w
-
+	buf := &bytes.Buffer{}
 	// rendering SVG
-	canv := modules.Canvas{width, height, os.Stdout}
+	canv := modules.Canvas{width, height, buf}
 	//canv.SimpleCircle()
 	//canv.Richter()
 	canv.Network()
 
-	o := make(chan string)
-	go func() {
-		buf := new(bytes.Buffer)
-		io.Copy(buf, r)
-		o <- buf.String()
-	}()
-	w.Close()
-	strSVG := <-o
-	return strSVG
+	return string(buf.Bytes())
 }
