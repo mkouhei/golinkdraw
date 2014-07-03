@@ -20,6 +20,10 @@ build: prebuild
 	go build -o _build/$(BIN)
 
 
+build-only:
+	go build -o _build/$(BIN)
+
+
 clean:
 	@rm -rf _build
 
