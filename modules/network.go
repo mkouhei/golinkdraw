@@ -6,8 +6,9 @@
 package modules
 
 import (
-	"github.com/ajstarks/svgo"
 	"strconv"
+
+	"github.com/ajstarks/svgo"
 )
 
 func (canv Canvas) Network() *svg.SVG {

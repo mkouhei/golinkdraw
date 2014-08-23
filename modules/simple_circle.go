@@ -8,8 +8,9 @@
 package modules
 
 import (
-	"github.com/ajstarks/svgo"
 	"time"
+
+	"github.com/ajstarks/svgo"
 )
 
 func now() string {

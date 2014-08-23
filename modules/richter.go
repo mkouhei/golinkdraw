@@ -4,9 +4,10 @@
 package modules
 
 import (
-	"github.com/ajstarks/svgo"
 	"math/rand"
 	"time"
+
+	"github.com/ajstarks/svgo"
 )
 
 func (canv Canvas) Richter() *svg.SVG {
