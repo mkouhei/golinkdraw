@@ -19,10 +19,12 @@ precheck:
 	fi
 
 prebuild:
-	#go get -d -v ./...
+	go get -d -v ./...
 	install -d $(CURDIR)/_build/src/$(GOPKG)
-	cp -a $(CURDIR)/*.go $(CURDIR)/_build/src/$(GOPKG)
-	cp -a $(CURDIR)/modules $(CURDIR)/_build/src/$(GOPKG)
+	cp -a $(CURDIR)/*.go \
+	$(CURDIR)/modules \
+	$(CURDIR)/templates \
+	$(CURDIR)/_build/src/$(GOPKG)
 
 build: prebuild
 	go build -o _build/$(BIN)
@@ -43,4 +45,6 @@ format:
 	done
 
 test: prebuild
-	go test -v -cover
+	go test -v -coverprofile=c.out $(GOPKG)
+	go tool cover -func=c.out
+	unlink c.out
