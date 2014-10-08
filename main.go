@@ -8,6 +8,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -18,7 +20,15 @@ var (
 	}
 )
 
+var version string
+var show_version = flag.Bool("version", false, "show_version")
+
 func main() {
+	flag.Parse()
+	if *show_version {
+		fmt.Printf("version: %s\n", version)
+		return
+	}
 	go h.run()
 	http.Handle("/", http.HandlerFunc(serveHome))
 	http.Handle("/ws", http.HandlerFunc(serveWs))
