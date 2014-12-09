@@ -1,3 +1,5 @@
+package main
+
 /*
  github.com/mkouhei/golinkdraw/writer.go
 
@@ -5,7 +7,6 @@
 
  This software is release under the Expat License.
 */
-package main
 
 import (
 	"bytes"
@@ -13,7 +14,7 @@ import (
 	"github.com/mkouhei/golinkdraw/modules"
 )
 
-func StringSVG(width int, height int) string {
+func stringSVG(width int, height int) string {
 	buf := &bytes.Buffer{}
 	// rendering SVG
 	canv := modules.Canvas{width, height, buf}

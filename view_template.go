@@ -1,3 +1,5 @@
+package main
+
 /*
  github.com/mkouhei/golinkdraw/view_template.go
 
@@ -11,7 +13,6 @@
  The original source code is licensed under the 2-Clause BSD License,
  and copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 */
-package main
 
 import (
 	"net/http"
@@ -38,7 +39,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		Data string
 	}{
 		r.Host,
-		StringSVG(defaultWidth, defaultHeight),
+		stringSVG(defaultWidth, defaultHeight),
 	}
 	homeTempl.Execute(w, &v)
 }

@@ -1,3 +1,5 @@
+package main
+
 /*
  github.com/mkouhei/golinkdraw/conn.go
 
@@ -11,7 +13,6 @@
  The original source code is licensed under the 2-Clause BSD License,
  and copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 */
-package main
 
 import (
 	"encoding/json"
@@ -100,12 +101,12 @@ func (c *connection) writePump() {
 				//log.Println(err)
 				continue
 			}
-			strSVG := StringSVG(data.Width, data.Height)
+			strSVG := stringSVG(data.Width, data.Height)
 			if err := c.write(websocket.TextMessage, []byte(strSVG)); err != nil {
 				return
 			}
 		case <-pollTicker.C:
-			strSVG := StringSVG(defaultWidth, defaultHeight)
+			strSVG := stringSVG(defaultWidth, defaultHeight)
 			if err := c.write(websocket.TextMessage, []byte(strSVG)); err != nil {
 				return
 			}

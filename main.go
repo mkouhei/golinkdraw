@@ -1,3 +1,5 @@
+package main
+
 /*
  github.com/mkouhei/golinkdraw/main.go
 
@@ -5,7 +7,6 @@
 
  This software is release under the Expat License.
 */
-package main
 
 import (
 	"flag"
@@ -21,11 +22,11 @@ var (
 )
 
 var version string
-var show_version = flag.Bool("version", false, "show_version")
+var showVersion = flag.Bool("version", false, "show_version")
 
 func main() {
 	flag.Parse()
-	if *show_version {
+	if *showVersion {
 		fmt.Printf("version: %s\n", version)
 		return
 	}
