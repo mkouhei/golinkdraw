@@ -4,11 +4,13 @@
 BIN := linkdraw
 SRC := *.go modules/*.go
 GOPKG := github.com/mkouhei/golinkdraw/
-GOPATH := $(CURDIR)/_build:$(GOPATH)
+GOPATH := $(CURDIR)/_build
 export GOPATH
+PATH := $(CURDIR)/_build/bin:$(PATH)
+export PATH
 
 
-all: precheck clean format test build
+all: precheck clean test format build
 
 
 precheck:
@@ -19,7 +21,9 @@ precheck:
 	fi
 
 prebuild:
-	go get -d -v ./...
+	#go get -d -v ./...
+	go get -d github.com/gorilla/websocket
+	go get -d github.com/ajstarks/svgo
 	install -d $(CURDIR)/_build/src/$(GOPKG)
 	cp -a $(CURDIR)/*.go \
 	$(CURDIR)/modules \
@@ -38,13 +42,15 @@ clean:
 
 format:
 	for src in $(SRC); do \
-		gofmt $$src > $$src.tmp ;\
-		goimports $$src.tmp > $$src.tmp2 ;\
-		mv -f $$src.tmp2 $$src ;\
-		rm -f $$src.tmp ;\
+		gofmt -w $$src ;\
+		goimports -w $$src ;\
 	done
 
 test: prebuild
+	go get -d github.com/golang/lint/golint
+	golint
+	go vet
 	go test -v -coverprofile=c.out $(GOPKG)
 	go tool cover -func=c.out
 	unlink c.out
+	rm -f $(BIN).test
