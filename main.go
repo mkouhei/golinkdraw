@@ -35,6 +35,6 @@ func main() {
 	http.Handle("/ws", http.HandlerFunc(serveWs))
 	http.Handle("/static/", http.FileServer(http.Dir(".")))
 	if err := http.ListenAndServe(s.Addr, nil); err != nil {
-		log.Fatal("ListenAndServe: %s", err)
+		log.Fatalf("ListenAndServe: %s", err)
 	}
 }
